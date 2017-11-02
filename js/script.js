@@ -12,15 +12,50 @@ $( document ).ready(function() {
 		//var results = jsonResultsByPropertie(data, "Fecha");
 		//var fechas = getFecha(results);
 		//getGananciaNetaPorMes(data, 10);
+		appendDataGenerationLastDay(data.slice(-1).pop());
 	});
 
+	function jsonResultsByPropertieModularizado(data, propertie, desde, hasta){			
+		var divPropertie = "listaJson"+propertie;
+		$("#"+divPropertie).empty();
+		for (var i = desde; i < hasta; i++) {
+			var ob = data[i];
+			var valPropertie = (ob[propertie]);
+  			if (isEmpty(valPropertie)) {
+				valPropertie = "---";
+			}
+			if (propertie==="Ganancia") {;
+				var number = Number(valPropertie.replace(/[^0-9\.-]+/g,""));
+				var gananciaPos = jsonResultsGananciaPosit(number);
+				var arrow = "<li><span><i class='fa fa-arrow-circle-down' style='text-align: center; color: red;''></i></span></li>";
+				if (gananciaPos) {
+					arrow = "<li><span><i class='fa fa-arrow-circle-up' style='text-align: center; color: green''></i></span></li>";
+				}
+				$("#listaJsonStatus").append(arrow);
+			}
+			$("#"+divPropertie).append('<li>'+valPropertie+'</li>');
+    	}
+	}
+
 	//Genera los datos iniciales en el Resumen total con paginado
-	function initDataGenerationLastDay(data, desde, hasta){
+	function initDataGenerationLastDay(data){
 		var properties = Object.keys(data[0]);
 		var length = data.length;
-		for (var j = length-1; j <= length; j++) {
+		for (var j = length-1; j < length; j++) {
 			var currentPropertie = properties[j];
 			jsonResultsRowsByPropertie(data, currentPropertie, desde, hasta);
+		}
+		//getTotalGananciaHistorica(data);
+		//getTotalPerdidaHistorica(data);
+	}
+
+	function appendDataGenerationLastDay(object){
+		var properties = Object.keys(object);
+		for (var i = 0; i < properties.length; i++) {
+			var currentPropertie = properties[i];
+			var valPropertie = (object[currentPropertie]);
+			var lista = "#listaJson"+currentPropertie+"Hoy";
+			$("#jsonResHoy").find(lista).html(valPropertie);
 		}
 	}
 
@@ -31,6 +66,8 @@ $( document ).ready(function() {
 			var currentPropertie = properties[j];
 			jsonResultsRowsByPropertie(data, currentPropertie, desde, hasta);
 		}
+		appendGananciaSemanal(getGananciaSemanal(data, "Ganancia"));
+		appendPerdidaSemanal(getGananciaSemanal(data, "Perdida"));
 	}
 
 	//Appendea la ganancia semanal al span
@@ -50,6 +87,9 @@ $( document ).ready(function() {
 		var currentWeek = Number($(".pagination").find(".disabled").children().html());
 		var hasta = 5*currentWeek;
 		var desde = hasta - 5;
+		if(hasta>data.length){
+	  		hasta = data.length;
+	  	}
 		for (var i = desde; i < hasta; i++) {
 			var ob = data[i];
 			var gananciaOb = (ob["Ganancia"]);
@@ -315,10 +355,9 @@ $( document ).ready(function() {
 				}
 				$(".pagination li:first-child a").focusout();
 				addCurrency();
-				var gananciaR = getGananciaSemanal(data, "Ganancia");
-				var perdidaR = getGananciaSemanal(data, "Perdida");
-				appendGananciaSemanal(gananciaR);
-    			appendPerdidaSemanal(perdidaR);
+				
+				appendGananciaSemanal(getGananciaSemanal(data, "Ganancia"));
+    			appendPerdidaSemanal(getGananciaSemanal(data, "Perdida"));
     			//ARREGLAR AL PRINCIPIO DE LA CARGA Y AL FINAL
 			//}
 			
