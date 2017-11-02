@@ -9,7 +9,6 @@ $( document ).ready(function() {
 		addCurrency();
 		getTotalGananciaHistorica(data);
 		getTotalPerdidaHistorica(data);
-
 		//var results = jsonResultsByPropertie(data, "Fecha");
 		//var fechas = getFecha(results);
 		//getGananciaNetaPorMes(data, 10);
@@ -34,19 +33,55 @@ $( document ).ready(function() {
 		}
 	}
 
-	function getGananciaSemanal(data){
-		var gananciaNetaSemanal = 0;
-		var currentWeek = Number($(".pagination").find(".currentLinkDisabled").html());
-		var desde = 1*currentWeek;
+	//Appendea la ganancia semanal al span
+	function appendGananciaSemanal(ganancia) {
+		$("#gananciaTotalSemanal").html(ganancia);
+	}
+
+	//Appendea la perdida semanal al span
+	function appendPerdidaSemanal(perdida) {
+		$("#perdidaTotalSemanal").html(perdida);
+	}
+	
+	//Calcula la ganancia de la semana que se muestra actualmente en el paginado
+	function getGananciaSemanal(data, pedidoGanancia){
+		console.log(pedidoGanancia);
+		var gananciaPerdidaNetaSemanal = 0;
+		var currentWeek = Number($(".pagination").find(".disabled").children().html());
 		var hasta = 5*currentWeek;
+		var desde = hasta - 5;
+		for (var i = desde; i < hasta; i++) {
+			var ob = data[i];
+			var gananciaOb = (ob["Ganancia"]);
+			var gananciaNumber = Number(gananciaOb.replace(/[^0-9\.-]+/g,""));
+			//if true trae ganancia sino perdida
+			if (pedidoGanancia === "Ganancia") {
+				if (gananciaNumber > 0) {
+					gananciaPerdidaNetaSemanal = +gananciaPerdidaNetaSemanal + +gananciaNumber;
+				}
+			}else if (pedidoGanancia === "Perdida") {
+				if (gananciaNumber < 0) {
+					gananciaPerdidaNetaSemanal = +gananciaPerdidaNetaSemanal + +gananciaNumber;
+				}
+			}
+		}
+		//console.log("gananciaPerdidaNetaSemanal: " + gananciaPerdidaNetaSemanal);
+		return gananciaPerdidaNetaSemanal.toFixed(2);
+	}
+
+	function getGananciaNetaSemanal(data){
+		var gananciaNetaSemanal = 0;
+		var currentWeek = Number($(".pagination").find(".disabled").children().html());
+		var hasta = 5*currentWeek;
+		var desde = hasta - 5;
 		for (var i = desde; i < hasta; i++) {
 			var ob = data[i];
 			var gananciaOb = (ob["Ganancia"]);
 			var gananciaNumber = Number(gananciaOb.replace(/[^0-9\.-]+/g,""));
 			gananciaNetaSemanal = +gananciaNetaSemanal + +gananciaNumber;
 		}
-		//return gananciaNetaSemanal;
 		console.log("gananciaNetaSemanal: " + gananciaNetaSemanal);
+		return gananciaNetaSemanal;
 	}
 
 	function getGananciaNetaPorMes(data, mesGanancia){
@@ -124,8 +159,6 @@ $( document ).ready(function() {
 			}
 			$("#"+divPropertie).append('<li>'+valPropertie+'</li>');
     	}
-    	getGananciaSemanal(data);
-
 	}
 
 	//devuelve todos los resultados del json de la propertie solicitada
@@ -282,6 +315,11 @@ $( document ).ready(function() {
 				}
 				$(".pagination li:first-child a").focusout();
 				addCurrency();
+				var gananciaR = getGananciaSemanal(data, "Ganancia");
+				var perdidaR = getGananciaSemanal(data, "Perdida");
+				appendGananciaSemanal(gananciaR);
+    			appendPerdidaSemanal(perdidaR);
+    			//ARREGLAR AL PRINCIPIO DE LA CARGA Y AL FINAL
 			//}
 			
 		});
