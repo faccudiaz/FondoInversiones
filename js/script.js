@@ -13,7 +13,12 @@ $( document ).ready(function() {
 		//var fechas = getFecha(results);
 		//getGananciaNetaPorMes(data, 10);
 		appendDataGenerationLastDay(data.slice(-1).pop());
+		makeDatePicker();
 	});
+
+	function makeDatePicker(){
+		if ( $('#inputFecha')[0].type != 'date' ) $('#test').datepicker();
+	}
 
 	function jsonResultsByPropertieModularizado(data, propertie, desde, hasta){			
 		var divPropertie = "listaJson"+propertie;
