@@ -13,7 +13,33 @@ $( document ).ready(function() {
 		//var fechas = getFecha(results);
 		//getGananciaNetaPorMes(data, 10);
 		appendDataGenerationLastDay(data.slice(-1).pop());
+		//makeDatePicker();
+		//addNewData(data);
 	});
+
+	$("#formNuevaGanancia").submit(function( event ) {
+		var inputs = $('#formNuevaGanancia :input');
+	    // not sure if you wanted this, but I thought I'd add it.
+	    // get an associative array of just the values.
+	    var values = {};
+	    $("form#formNuevaGanancia :input").each(function(){
+			var input = $(this); // This is the jquery object of the input, do what you will
+			values.push(input.val());
+			console.log(values);
+		});
+	    console.log(inputs);
+	    console.log(values);
+	});
+
+	function addNewData(data){
+		var ob = {"Fecha":"01/11/2017","Capital":"67,532.66","Porcentaje":"0.33%","Ganancia":"219.75","Detalle":""};
+		data.push(ob)
+		console.log(data);
+;	}
+
+	function makeDatePicker(){
+		if ( $('#inputFecha')[0].type != 'date' ) $('#test').datepicker();
+	}
 
 	function jsonResultsByPropertieModularizado(data, propertie, desde, hasta){			
 		var divPropertie = "listaJson"+propertie;

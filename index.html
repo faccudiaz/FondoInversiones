@@ -61,7 +61,6 @@
 		</div>
 	</header>
 	<section id="jsonSection" class="jsonSection">
-		
 		<div class="container" id="jsonResHoy">
 			<div class="row">
 				<h3>Resumen del último dia</h3>
@@ -93,7 +92,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="container" id="jsonRes">
+		<div class="container containerTotal" id="jsonRes">
 			<div class="row">
 				<h3>Resumen Total</h3>
 			</div>
@@ -123,7 +122,7 @@
 					<ul id="listaJsonStatus" class="listJson5Results"></ul>
 				</div>
 			</div>
-			<div class="row h-100">
+			<div class="row containerTotal">
 				<div class="col-sm-4">
 					<h6>Ganancia Total Semanal</h6>
 					<span id="gananciaTotalSemanal" class="enMoney"></span>
@@ -132,7 +131,6 @@
 					<h6>Perdida Total Semanal</h6>
 					<span id="perdidaTotalSemanal" class="enMoney"></span>
 				</div>
-				
 			</div>
 			<div class="row pull-right">
 				<nav aria-label="Page navigation example">
@@ -155,20 +153,46 @@
 	<!-- About Section -->
 	<section class="success" id="about">
 		<div class="container">
-			<h2 class="text-center">About</h2>
-			<hr class="star-light">
-			<div class="row">
-				<div class="col-lg-4 ml-auto">
-					<p>Freelancer is a free bootstrap theme created by Start Bootstrap. The download includes the complete source files including HTML, CSS, and JavaScript as well as optional LESS stylesheets for easy customization.</p>
-				</div>
-				<div class="col-lg-4 mr-auto">
-					<p>Whether you're a student looking to showcase your work, a professional looking to attract clients, or a graphic artist looking to share your projects, this template is the perfect starting point!</p>
-				</div>
+			<h2 class="text-center">Cargar datos nuevos</h2>
+			<div class="row"> 
 				<div class="col-lg-8 mx-auto text-center">
-					<a href="#" class="btn btn-lg btn-outline">
-						<i class="fa fa-download"></i>
-						Download Theme
-					</a>
+					<form id="formNuevaGanancia">
+						<div class="form-group row">
+							<label for="inputFecha3" class="col-sm-4 col-form-label">Fecha</label>
+							<div class="col-sm-6">
+								<input type="date" class="form-control" id="inputFecha" placeholder="Fecha">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="inputCapital" class="col-sm-4 col-form-label">Capital Actualizado</label>
+							<div class="col-sm-6">
+								<input type="text" class="form-control" id="inputCapital" placeholder="Capital Actualizado">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="inputPorcentaje" class="col-sm-4 col-form-label">Porcentaje</label>
+							<div class="col-sm-6">
+								<input type="number" class="form-control" id="inputPorcentaje" placeholder="Porcentaje" min="0" max="100" step=".01">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="inputGanancia" class="col-sm-4 col-form-label">Ganancia</label>
+							<div class="col-sm-6">
+								<input type="text" class="form-control" id="inputGanancia" placeholder="Ganancia">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="inputDetalle" class="col-sm-4 col-form-label">Detalle</label>
+							<div class="col-sm-6">
+								<input type="text" class="form-control" id="inputDetalle" placeholder="Detalle">
+							</div>
+						</div>
+						<div class="form-group row">
+							<div class="col-sm-10">
+								<button type="submit" class="btn btn-primary">Enviar</button>
+							</div>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
