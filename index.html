@@ -155,60 +155,43 @@
 		<div class="container">
 			<h2 class="text-center">Cargar datos nuevos</h2>
 			<div class="row"> 
-				<div class="col-lg-6 mx-auto text-center">
-					<form>
-					  <div class="form-group row">
-					    <label for="inputFecha3" class="col-sm-2 col-form-label">Fecha</label>
-					    <div class="col-sm-10">
-					      <input type="date" class="form-control" id="inputFecha" placeholder="Fecha">
-					    </div>
-					  </div>
-					  <div class="form-group row">
-					    <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
-					    <div class="col-sm-10">
-					      <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
-					    </div>
-					  </div>
-					  <fieldset class="form-group">
-					    <div class="row">
-					      <legend class="col-form-legend col-sm-2">Radios</legend>
-					      <div class="col-sm-10">
-					        <div class="form-check">
-					          <label class="form-check-label">
-					            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-					            Option one is this and that&mdash;be sure to include why it's great
-					          </label>
-					        </div>
-					        <div class="form-check">
-					          <label class="form-check-label">
-					            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-					            Option two can be something else and selecting it will deselect option one
-					          </label>
-					        </div>
-					        <div class="form-check disabled">
-					          <label class="form-check-label">
-					            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3" disabled>
-					            Option three is disabled
-					          </label>
-					        </div>
-					      </div>
-					    </div>
-					  </fieldset>
-					  <div class="form-group row">
-					    <div class="col-sm-2">Checkbox</div>
-					    <div class="col-sm-10">
-					      <div class="form-check">
-					        <label class="form-check-label">
-					          <input class="form-check-input" type="checkbox"> Check me out
-					        </label>
-					      </div>
-					    </div>
-					  </div>
-					  <div class="form-group row">
-					    <div class="col-sm-10">
-					      <button type="submit" class="btn btn-primary">Sign in</button>
-					    </div>
-					  </div>
+				<div class="col-lg-8 mx-auto text-center">
+					<form id="formNuevaGanancia">
+						<div class="form-group row">
+							<label for="inputFecha3" class="col-sm-4 col-form-label">Fecha</label>
+							<div class="col-sm-6">
+								<input type="date" class="form-control" id="inputFecha" placeholder="Fecha">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="inputCapital" class="col-sm-4 col-form-label">Capital Actualizado</label>
+							<div class="col-sm-6">
+								<input type="text" class="form-control" id="inputCapital" placeholder="Capital Actualizado">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="inputPorcentaje" class="col-sm-4 col-form-label">Porcentaje</label>
+							<div class="col-sm-6">
+								<input type="number" class="form-control" id="inputPorcentaje" placeholder="Porcentaje" min="0" max="100" step=".01">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="inputGanancia" class="col-sm-4 col-form-label">Ganancia</label>
+							<div class="col-sm-6">
+								<input type="text" class="form-control" id="inputGanancia" placeholder="Ganancia">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="inputDetalle" class="col-sm-4 col-form-label">Detalle</label>
+							<div class="col-sm-6">
+								<input type="text" class="form-control" id="inputDetalle" placeholder="Detalle">
+							</div>
+						</div>
+						<div class="form-group row">
+							<div class="col-sm-10">
+								<button type="submit" class="btn btn-primary">Enviar</button>
+							</div>
+						</div>
 					</form>
 				</div>
 			</div>
